@@ -57,13 +57,27 @@ button {
   align-items: center;
 }
 
-#cart p {
+#cart-container p {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px 0;
 }
 
-#cart span {
+#cart-container span {
   margin: 0 10px;
+}
+
+#message {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1a8431;
+  color: white;
+  padding: 10px;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  display: none; /* Ocultar el mensaje inicialmente */
 }

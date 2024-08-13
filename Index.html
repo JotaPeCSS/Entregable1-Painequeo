@@ -1,63 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tienda Personalizada</title>
-    <link rel="stylesheet" href="./CSS/styles.css" />
-  </head>
-  <body>
-    <div class="banner" id="banner">
-      <h1>Titulo H1</h1>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Productos</title>
+    <link rel="stylesheet" href="./CSS/styles.css">
+</head>
+<body>
+    <div class="banner">
+        <h1>Tienda de Productos</h1>
     </div>
-    <div class="main-container">
-      <div class="products-container">
-        <div class="product">
-          <div class="placeholder"></div>
-          <h2>Gorra Personalizada</h2>
-          <p>Precio: $5</p>
-          <button onclick="addToCart('gorra')">Añadir al Carro</button>
-        </div>
-        <div class="product">
-          <div class="placeholder"></div>
-          <h2>Camiseta Personalizada</h2>
-          <p>Precio: $10</p>
-          <button onclick="addToCart('camiseta')">Añadir al Carro</button>
-        </div>
-        <div class="product">
-          <div class="placeholder"></div>
-          <h2>Chaqueta Personalizada</h2>
-          <p>Precio: $25</p>
-          <button onclick="addToCart('chaqueta')">Añadir al Carro</button>
-        </div>
-      </div>
 
-      <div id="cart-container">
-        <h2>Carro de Compras</h2>
-        <div id="cart">
-          <p>
-            Gorras: <button onclick="updateCart('gorra', 'remove')">-</button>
-            <span id="gorra-count">0</span>
-            <button onclick="updateCart('gorra', 'add')">+</button>
-          </p>
-          <p>
-            Camisetas:
-            <button onclick="updateCart('camiseta', 'remove')">-</button>
-            <span id="camiseta-count">0</span>
-            <button onclick="updateCart('camiseta', 'add')">+</button>
-          </p>
-          <p>
-            Chaquetas:
-            <button onclick="updateCart('chaqueta', 'remove')">-</button>
-            <span id="chaqueta-count">0</span>
-            <button onclick="updateCart('chaqueta', 'add')">+</button>
-          </p>
-          <p>Total: $<span id="total">0</span></p>
-          <button onclick="checkout()">Comprar</button>
-          <button onclick="clearCart()">Cancelar</button>
+    <div class="main-container">
+        <!-- Contenedor para los productos -->
+        <div class="products-container">
+            <div class="product">
+                <div class="placeholder"></div>
+                <p>Gorra - $5</p>
+                <button id="add-gorra">Añadir al carrito</button>
+            </div>
+            <div class="product">
+                <div class="placeholder"></div>
+                <p>Camiseta - $10</p>
+                <button id="add-camiseta">Añadir al carrito</button>
+            </div>
+            <div class="product">
+                <div class="placeholder"></div>
+                <p>Chaqueta - $25</p>
+                <button id="add-chaqueta">Añadir al carrito</button>
+            </div>
         </div>
-      </div>
+
+        <!-- Contenedor para el carrito de compras -->
+        <div id="cart-container">
+            <h2>Carrito de Compras</h2>
+            <p>Gorra: <span id="gorra-count">0</span></p>
+            <p>Camiseta: <span id="camiseta-count">0</span></p>
+            <p>Chaqueta: <span id="chaqueta-count">0</span></p>
+            <p>Total: $<span id="total">0.00</span></p>
+            <button id="checkout" disabled>Checkout</button>
+            <button id="clear-cart">Vaciar Carrito</button>
+        </div>
     </div>
+
+    <!-- Mensaje de checkout -->
+    <div id="message"></div>
+
+    <!-- Archivo JavaScript -->
     <script src="./JavaScript/script.js"></script>
-  </body>
+</body>
 </html>
