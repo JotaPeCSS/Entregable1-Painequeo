@@ -46,7 +46,8 @@ class ShoppingCart {
     document.getElementById("gorra-count").innerText = this.cart.gorra;
     document.getElementById("camiseta-count").innerText = this.cart.camiseta;
     document.getElementById("chaqueta-count").innerText = this.cart.chaqueta;
-    document.getElementById("total").innerText = this.calculateTotal().toFixed(2);
+    document.getElementById("total").innerText =
+      this.calculateTotal().toFixed(2);
   }
 
   // Calcula el total en precio del carrito
@@ -112,8 +113,18 @@ class ShoppingCart {
 const cart = new ShoppingCart();
 
 // Asigna los eventos a los botones
-document.getElementById("add-gorra").addEventListener("click", () => cart.addToCart('gorra'));
-document.getElementById("add-camiseta").addEventListener("click", () => cart.addToCart('camiseta'));
-document.getElementById("add-chaqueta").addEventListener("click", () => cart.addToCart('chaqueta'));
-document.getElementById("checkout").addEventListener("click", () => cart.checkout());
-document.getElementById("clear-cart").addEventListener("click", () => cart.clearCart());
+document
+  .getElementById("add-gorra")
+  .addEventListener("click", () => cart.addToCart("gorra"));
+document
+  .getElementById("add-camiseta")
+  .addEventListener("click", () => cart.addToCart("camiseta"));
+document
+  .getElementById("add-chaqueta")
+  .addEventListener("click", () => cart.addToCart("chaqueta"));
+document
+  .getElementById("checkout")
+  .addEventListener("click", () => cart.checkout());
+document
+  .getElementById("clear-cart")
+  .addEventListener("click", () => cart.clearCart());
