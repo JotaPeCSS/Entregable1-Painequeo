@@ -6,6 +6,7 @@ let cart = []; // Array para almacenar los productos del carrito
 function initializeCart() {
     const cartElement = document.getElementById('cart');
     const closeCartButton = document.getElementById('close-cart');
+    const openCartButton = document.getElementById('open-cart');
 
     if (closeCartButton) {
         closeCartButton.addEventListener('click', () => {
@@ -14,6 +15,15 @@ function initializeCart() {
         });
     } else {
         console.error('Botón para cerrar el carrito no encontrado');
+    }
+
+    if (openCartButton) {
+        openCartButton.addEventListener('click', () => {
+            cartElement.classList.toggle('cart-hidden');
+            cartElement.classList.toggle('cart-visible');
+        });
+    } else {
+        console.error('Botón para abrir el carrito no encontrado');
     }
 
     // Renderizar el carrito al inicializar
