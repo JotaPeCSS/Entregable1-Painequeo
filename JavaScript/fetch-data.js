@@ -1,33 +1,57 @@
-// fetch-data.js
-
-// Función para obtener los productos desde el archivo JSON
+// Fetch Products Data
 async function fetchProducts() {
     try {
-        const response = await fetch('data/products.json');
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        return data;
+        const response = await fetch('./data/products.json');
+        if (!response.ok) {
+            throw new Error('Error al cargar los datos de los productos');
+        }
+        const products = await response.json();
+        return products;
     } catch (error) {
-        console.error('Error en fetchProducts:', error);
-        // Mostrar mensaje UX si se desea
+        console.error('Error:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se pudieron cargar los productos. Por favor, inténtelo más tarde.',
+        });
     }
 }
 
-// Función para renderizar los productos en la página
+// Render Products
 async function renderProducts() {
+    const productsContainer = document.getElementById('products-container');
     const products = await fetchProducts();
-    if (products) {
-        const container = document.getElementById('products-container');
-        container.innerHTML = products.map(product => `
+
+    products.forEach(product => {
+        const productHTML = `
             <div class="product">
-                <div class="placeholder">${product.name}</div>
-                <h3>${product.name}</h3>
-                <p>$${product.price.toFixed(2)}</p>
-                <button class="add-to-cart-button" data-id="${product.id}">Añadir al carrito</button>
+                <div class="placeholder"><img src="${product.image}" alt="${product.name}"></div>
+                <p>${product.name} - $${product.price}</p>
+                <label for="color-${product.id}">Color:</label>
+                <select id="color-${product.id}">
+                    <option value="rojo">Rojo</option>
+                    <option value="azul">Azul</option>
+                    <option value="verde">Verde</option>
+                    <option value="amarillo">Amarillo</option>
+                </select>
+                <label for="size-${product.id}">Tamaño:</label>
+                <select id="size-${product.id}">
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+                <button id="add-${product.id}">Añadir al carrito</button>
             </div>
-        `).join('');
-    }
+        `;
+        productsContainer.insertAdjacentHTML('beforeend', productHTML);
+
+        // Add event listener for new product buttons
+        document.getElementById(`add-${product.id}`).addEventListener('click', () => {
+            shoppingCart.addToCart(product.id);
+        });
+    });
 }
 
-// Renderizar productos al cargar la página
-document.addEventListener('DOMContentLoaded', renderProducts);
+// Initialize Products
+renderProducts();
