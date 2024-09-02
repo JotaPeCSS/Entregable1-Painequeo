@@ -13,6 +13,8 @@ function initializeCart() {
             cart.classList.remove('cart-visible');
             cart.classList.add('cart-hidden');
         });
+    } else {
+        console.error('Botón para cerrar el carrito no encontrado');
     }
 
     if (cartButton) {
@@ -20,20 +22,52 @@ function initializeCart() {
             cart.classList.toggle('cart-hidden');
             cart.classList.toggle('cart-visible');
         });
+    } else {
+        console.error('Botón para abrir el carrito no encontrado');
     }
 
     if (emptyCartButton) {
         emptyCartButton.addEventListener('click', () => {
-            localStorage.removeItem('cartItems');
-            renderCart();
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡Esto vaciará todos los productos del carrito!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, vaciar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem('cartItems');
+                    renderCart();
+                    Swal.fire(
+                        '¡Vacío!',
+                        'El carrito ha sido vaciado.',
+                        'success'
+                    );
+                }
+            });
         });
+    } else {
+        console.error('Botón para vaciar el carrito no encontrado');
     }
 
     if (checkoutButton) {
         checkoutButton.addEventListener('click', () => {
-            // Aquí puedes manejar el proceso de compra
-            alert('Proceso de compra no implementado.');
+            Swal.fire({
+                title: '¡Compra realizada!',
+                text: 'Gracias por tu compra. ¡Que tengas un buen día!',
+                icon: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                localStorage.removeItem('cartItems');
+                renderCart();
+            });
         });
+    } else {
+        console.error('Botón para realizar la compra no encontrado');
     }
 }
 
@@ -65,35 +99,6 @@ function addToCart(productId) {
     renderCart();
 }
 
-// Función para eliminar un producto del carrito
-function removeFromCart(productId) {
-    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    // Filtra el carrito para eliminar el producto con el ID proporcionado
-    cartItems = cartItems.filter(item => item.id !== productId);
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    renderCart();
-}
-
-// Función para actualizar la cantidad de un producto en el carrito
-function updateQuantity(productId, action) {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const product = cartItems.find(item => item.id === productId);
-    
-    if (product) {
-        if (action === 'increase') {
-            product.quantity += 1;
-        } else if (action === 'decrease') {
-            product.quantity -= 1;
-            if (product.quantity <= 0) {
-                removeFromCart(productId);
-                return;
-            }
-        }
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-        renderCart();
-    }
-}
-
 // Función para renderizar el carrito
 function renderCart() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -106,13 +111,10 @@ function renderCart() {
     cartItems.forEach(item => {
         const itemHTML = `
             <div class="cart-item">
-                <p>${item.name} - $${item.price} (${item.color}, ${item.size})</p>
-                <div class="quantity">
-                    <button data-id="${item.id}" class="decrease">-</button>
-                    <span>${item.quantity}</span>
-                    <button data-id="${item.id}" class="increase">+</button>
-                </div>
-                <button data-id="${item.id}" class="remove">Eliminar</button>
+                <p>${item.name} - $${item.price} (${item.color}, ${item.size}) x ${item.quantity}</p>
+                <button data-id="${item.id}" class="remove-from-cart">Eliminar</button>
+                <button data-id="${item.id}" class="increase-quantity">+</button>
+                <button data-id="${item.id}" class="decrease-quantity">-</button>
             </div>
         `;
         cartContainer.insertAdjacentHTML('beforeend', itemHTML);
@@ -128,16 +130,25 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCart();
 });
 
-// Añadir eventos a los botones dentro del carrito
+// Añadir eventos a los botones de añadir al carrito y los botones de carrito
 document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('increase')) {
+    if (event.target.classList.contains('add-to-cart-button')) {
         const productId = event.target.getAttribute('data-id');
-        updateQuantity(productId, 'increase');
-    } else if (event.target.classList.contains('decrease')) {
-        const productId = event.target.getAttribute('data-id');
-        updateQuantity(productId, 'decrease');
-    } else if (event.target.classList.contains('remove')) {
+        addToCart(productId);
+    }
+
+    if (event.target.classList.contains('remove-from-cart')) {
         const productId = event.target.getAttribute('data-id');
         removeFromCart(productId);
+    }
+
+    if (event.target.classList.contains('increase-quantity')) {
+        const productId = event.target.getAttribute('data-id');
+        updateQuantity(productId, 1);
+    }
+
+    if (event.target.classList.contains('decrease-quantity')) {
+        const productId = event.target.getAttribute('data-id');
+        updateQuantity(productId, -1);
     }
 });
