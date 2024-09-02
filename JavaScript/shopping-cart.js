@@ -50,7 +50,12 @@ function addToCart(productId) {
     }
 
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    renderCart();
+    renderCart();  // Renderiza el carrito después de añadir un producto
+
+    // Despliega el carrito automáticamente después de añadir un producto
+    const cart = document.getElementById('cart');
+    cart.classList.remove('cart-hidden');
+    cart.classList.add('cart-visible');
 }
 
 // Función para renderizar el carrito
