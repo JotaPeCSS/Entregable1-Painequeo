@@ -1,105 +1,81 @@
 /* styles.css */
-
-/* Estilo general del cuerpo de la página */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Estilo para el banner de bienvenida */
 .banner {
-  text-align: center;
-  padding: 20px;
-  background-color: #f1f1f1;
+    text-align: center;
+    padding: 20px;
+    background-color: #f1f1f1;
 }
 
-/* Estilo para la barra de navegación */
 .navbar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding: 10px;
-  background: white;
-  box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
 }
 
-/* Estilo para los iconos en la barra de navegación */
 .navbar .material-symbols-outlined {
-  font-size: 24px;
-  cursor: pointer;
+    font-size: 24px;
+    cursor: pointer;
 }
 
-/* Contenedor principal con margen superior para la barra de navegación fija */
 .main-container {
-  margin-top: 60px; /* Espacio para la barra de navegación fija */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+    margin-top: 60px; 
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* Contenedor de productos con alineación horizontal */
 .products-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  max-width: 1200px; /* Para evitar que el contenedor se expanda demasiado */
-  padding: 0 20px; /* Espaciado horizontal */
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
-/* Estilo de cada producto individual */
 .product {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-  width: 200px; /* Ancho fijo para cada producto */
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
 }
 
-/* Estilo para los placeholders de las imágenes */
 .placeholder {
-  width: 150px;
-  height: 150px;
-  background-color: #eee;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Ajuste de las imágenes dentro de los productos */
 .product img {
-  max-width: 100%;
-  max-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
-/* Estilo para el carrito de compras */
 .cart-hidden {
-  display: none;
+    display: none;
 }
 
 .cart-visible {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 300px;
-  height: 100%;
-  background: white;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  overflow-y: auto;
-  transition: transform 0.3s ease;
-  z-index: 1000; /* Asegura que el carrito esté por encima de otros elementos */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
 }
 
-/* Estilo para el botón de cerrar el carrito */
 #close-cart {
-  font-size: 24px;
-  cursor: pointer;
-  display: block;
-  margin-bottom: 20px;
+    font-size: 24px;
+    cursor: pointer;
 }
 
-/* Estilo para el total del carrito */
 #total {
-  font-weight: bold;
+    font-weight: bold;
 }
