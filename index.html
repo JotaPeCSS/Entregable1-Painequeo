@@ -3,34 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda</title>
+    <title>Tienda Web</title>
     <link rel="stylesheet" href="./CSS/styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <div class="banner">
-        <h1>Bienvenido a la Tienda</h1>
-    </div>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div id="cart-button" class="material-symbols-outlined">shopping_cart</div>
+    </nav>
 
-    <!-- Barra de Navegación -->
-    <div class="navbar">
-        <!-- Botón para abrir el carrito -->
-        <button id="cart-button" class="material-symbols-outlined">shopping_cart</button>
-    </div>
+    <!-- Productos -->
+    <div id="products-container" class="products-container"></div>
 
-    <!-- Contenedor del carrito -->
+    <!-- Carrito de Compras -->
     <div id="cart" class="cart-hidden">
-        <span id="close-cart" class="material-symbols-outlined">close</span>
         <div id="cart-items"></div>
-        <p id="total">Total: $0.00</p>
+        <div id="total">Total: $0.00</div>
+        <button id="empty-cart">Vaciar carrito</button>
+        <button id="checkout">Realizar compra</button>
+        <span id="close-cart" class="material-symbols-outlined">close</span>
     </div>
 
-    <!-- Contenedor de productos -->
-    <div id="products-container" class="main-container">
-        <!-- Productos se cargarán aquí -->
-    </div>
-
+    <!-- Scripts -->
     <script src="./JavaScript/fetch-data.js"></script>
     <script src="./JavaScript/shopping-cart.js"></script>
+    <script src="./JavaScript/script.js"></script>
 </body>
 </html>
