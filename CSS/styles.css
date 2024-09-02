@@ -13,22 +13,6 @@ body {
   background-color: #f1f1f1;
 }
 
-/* Barra de Navegación */
-.navbar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding: 10px;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Asegura que la barra de navegación esté encima de otros elementos */
-}
-
-.navbar .material-symbols-outlined {
-  font-size: 24px;
-  cursor: pointer;
-}
-
 /* Contenedor Principal */
 .main-container {
   margin-top: 60px; /* Asegura espacio para la barra de navegación fija */
@@ -72,11 +56,11 @@ body {
 .cart-visible {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0; /* Ajustado para que esté a la izquierda */
   width: 300px;
   height: 100%;
   background: white;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Cambiado para que la sombra sea hacia la derecha */
   padding: 20px;
   overflow-y: auto;
   transition: transform 0.3s ease;
@@ -87,7 +71,7 @@ body {
 #cart-button {
   position: fixed;
   top: 10px;
-  left: 10px;
+  left: 10px; /* Ajustado para que esté a la izquierda */
   font-size: 24px;
   cursor: pointer;
   background: #fff;
