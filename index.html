@@ -5,48 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Productos</title>
     <link rel="stylesheet" href="./CSS/styles.css">
+    <!-- Incluye la librería SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <!-- Banner de bienvenida -->
     <div class="banner">
-        <h1>Tienda de Productos</h1>
+        <h1>Bienvenido a nuestra tienda</h1>
     </div>
 
+    <!-- Barra de navegación con el icono del carrito -->
+    <div class="navbar">
+        <span class="material-symbols-outlined" id="cart-toggle">shopping_cart</span>
+    </div>
+
+    <!-- Contenedor principal con los productos y carrito -->
     <div class="main-container">
-        <!-- Contenedor para los productos -->
-        <div class="products-container">
-            <div class="product">
-                <div class="placeholder"></div>
-                <p>Gorra - $5</p>
-                <button id="add-gorra">Añadir al carrito</button>
-            </div>
-            <div class="product">
-                <div class="placeholder"></div>
-                <p>Camiseta - $10</p>
-                <button id="add-camiseta">Añadir al carrito</button>
-            </div>
-            <div class="product">
-                <div class="placeholder"></div>
-                <p>Chaqueta - $25</p>
-                <button id="add-chaqueta">Añadir al carrito</button>
-            </div>
-        </div>
+        <!-- Contenedor de productos -->
+        <div id="products-container" class="products-container"></div>
 
-        <!-- Contenedor para el carrito de compras -->
-        <div id="cart-container">
+        <!-- Contenedor del carrito de compras -->
+        <div id="cart" class="cart-hidden">
+            <span id="close-cart" class="material-symbols-outlined">close</span>
             <h2>Carrito de Compras</h2>
-            <p>Gorra: <span id="gorra-count">0</span></p>
-            <p>Camiseta: <span id="camiseta-count">0</span></p>
-            <p>Chaqueta: <span id="chaqueta-count">0</span></p>
-            <p>Total: $<span id="total">0.00</span></p>
-            <button id="checkout" disabled>Checkout</button>
-            <button id="clear-cart">Vaciar Carrito</button>
+            <ul id="cart-items"></ul>
+            <p id="total">Total: $0</p>
         </div>
     </div>
 
-    <!-- Mensaje de checkout -->
-    <div id="message"></div>
-
-    <!-- Archivo JavaScript -->
-    <script src="./JavaScript/script.js"></script>
+    <!-- Scripts JavaScript -->
+    <script src="./JavaScript/fetch-data.js"></script>
+    <script src="./JavaScript/shopping-cart.js"></script>
 </body>
 </html>
