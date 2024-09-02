@@ -4,15 +4,15 @@
 function initializeCart() {
     const cart = document.getElementById('cart');
     const closeCartButton = document.getElementById('close-cart');
-    const cartButton = document.getElementById('cart-button'); // Botón para abrir el carrito
+    const cartButton = document.getElementById('cart-button');
+    const emptyCartButton = document.getElementById('empty-cart');
+    const checkoutButton = document.getElementById('checkout');
 
     if (closeCartButton) {
         closeCartButton.addEventListener('click', () => {
             cart.classList.remove('cart-visible');
             cart.classList.add('cart-hidden');
         });
-    } else {
-        console.error('Botón para cerrar el carrito no encontrado');
     }
 
     if (cartButton) {
@@ -20,8 +20,20 @@ function initializeCart() {
             cart.classList.toggle('cart-hidden');
             cart.classList.toggle('cart-visible');
         });
-    } else {
-        console.error('Botón para abrir el carrito no encontrado');
+    }
+
+    if (emptyCartButton) {
+        emptyCartButton.addEventListener('click', () => {
+            localStorage.removeItem('cartItems');
+            renderCart();
+        });
+    }
+
+    if (checkoutButton) {
+        checkoutButton.addEventListener('click', () => {
+            // Aquí puedes manejar el proceso de compra
+            alert('Proceso de compra no implementado.');
+        });
     }
 }
 
@@ -33,7 +45,7 @@ function addToCart(productId) {
     const productPrice = parseFloat(productElement.closest('.product').querySelector('p').textContent.split('$')[1]);
     const productColor = document.getElementById(`color-${productId}`).value;
     const productSize = document.getElementById(`size-${productId}`).value;
-    
+
     // Verificar si el producto ya está en el carrito
     const existingProduct = cartItems.find(item => item.id === productId);
     if (existingProduct) {
@@ -55,31 +67,31 @@ function addToCart(productId) {
 
 // Función para eliminar un producto del carrito
 function removeFromCart(productId) {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const updatedCartItems = cartItems.filter(item => item.id !== productId);
-    localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    // Filtra el carrito para eliminar el producto con el ID proporcionado
+    cartItems = cartItems.filter(item => item.id !== productId);
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
     renderCart();
 }
 
-// Función para vaciar el carrito
-function emptyCart() {
-    localStorage.removeItem('cartItems');
-    renderCart();
-}
-
-// Función para realizar la compra
-function checkout() {
+// Función para actualizar la cantidad de un producto en el carrito
+function updateQuantity(productId, action) {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    if (cartItems.length === 0) {
-        alert('El carrito está vacío.');
-        return;
+    const product = cartItems.find(item => item.id === productId);
+    
+    if (product) {
+        if (action === 'increase') {
+            product.quantity += 1;
+        } else if (action === 'decrease') {
+            product.quantity -= 1;
+            if (product.quantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+        }
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        renderCart();
     }
-
-    // Aquí podrías integrar una lógica para procesar la compra
-    alert('Compra realizada con éxito.');
-
-    // Vaciar el carrito después de la compra
-    emptyCart();
 }
 
 // Función para renderizar el carrito
@@ -94,8 +106,13 @@ function renderCart() {
     cartItems.forEach(item => {
         const itemHTML = `
             <div class="cart-item">
-                <p>${item.name} - $${item.price} (${item.color}, ${item.size}) x ${item.quantity}</p>
-                <button data-id="${item.id}" class="remove-from-cart">Eliminar</button>
+                <p>${item.name} - $${item.price} (${item.color}, ${item.size})</p>
+                <div class="quantity">
+                    <button data-id="${item.id}" class="decrease">-</button>
+                    <span>${item.quantity}</span>
+                    <button data-id="${item.id}" class="increase">+</button>
+                </div>
+                <button data-id="${item.id}" class="remove">Eliminar</button>
             </div>
         `;
         cartContainer.insertAdjacentHTML('beforeend', itemHTML);
@@ -111,22 +128,16 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCart();
 });
 
-// Añadir eventos a los botones de añadir al carrito
+// Añadir eventos a los botones dentro del carrito
 document.addEventListener('click', (event) => {
-    if (event.target.classList.contains('add-to-cart-button')) {
+    if (event.target.classList.contains('increase')) {
         const productId = event.target.getAttribute('data-id');
-        addToCart(productId);
-    } else if (event.target.classList.contains('remove-from-cart')) {
+        updateQuantity(productId, 'increase');
+    } else if (event.target.classList.contains('decrease')) {
+        const productId = event.target.getAttribute('data-id');
+        updateQuantity(productId, 'decrease');
+    } else if (event.target.classList.contains('remove')) {
         const productId = event.target.getAttribute('data-id');
         removeFromCart(productId);
-    }
-});
-
-// Añadir eventos a los botones de vaciar carrito y realizar compra
-document.addEventListener('click', (event) => {
-    if (event.target.id === 'empty-cart') {
-        emptyCart();
-    } else if (event.target.id === 'checkout') {
-        checkout();
     }
 });
