@@ -47,13 +47,8 @@ async function renderProducts() {
             </div>
         `;
         productsContainer.insertAdjacentHTML('beforeend', productHTML);
-
-        // Add event listener for new product buttons
-        document.getElementById(`add-${product.id}`).addEventListener('click', () => {
-            addToCart(product.id);
-        });
     });
 }
 
-// Initialize Products
+// Inicializar Productos
 renderProducts();
