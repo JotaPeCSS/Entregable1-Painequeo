@@ -1,6 +1,8 @@
 /* Estilos Generales */
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* Banner */
@@ -16,6 +18,9 @@ body {
   top: 0;
   right: 0;
   padding: 10px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Asegura que la barra de navegación esté encima de otros elementos */
 }
 
 .navbar .material-symbols-outlined {
@@ -74,6 +79,7 @@ body {
   padding: 20px;
   overflow-y: auto;
   transition: transform 0.3s ease;
+  z-index: 1000; /* Asegura que el carrito esté encima de otros elementos */
 }
 
 #close-cart {
