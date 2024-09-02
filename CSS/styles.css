@@ -3,6 +3,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  position: relative; /* Asegura que el carrito se posicione respecto al body */
 }
 
 /* Banner */
@@ -82,11 +83,27 @@ body {
   z-index: 1000; /* Asegura que el carrito esté encima de otros elementos */
 }
 
+/* Icono del carrito */
+#cart-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  background: #fff;
+  border: none;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1001; /* Asegura que el ícono del carrito esté encima del contenido */
+}
+
+/* Cerrar Carrito */
 #close-cart {
   font-size: 24px;
   cursor: pointer;
 }
 
+/* Total */
 #total {
   font-weight: bold;
 }
