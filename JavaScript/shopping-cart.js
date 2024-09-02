@@ -5,6 +5,7 @@ const cart = document.getElementById('cart');
 const closeCartButton = document.getElementById('close-cart');
 const cartItemsContainer = document.getElementById('cart-items');
 const totalElement = document.getElementById('total');
+const cartToggleButton = document.getElementById('cart-toggle');
 
 let cartItems = []; // Array para almacenar los productos del carrito
 let products = []; // Array para almacenar los datos de los productos
@@ -18,6 +19,15 @@ function initializeCart() {
         });
     } else {
         console.error('Botón para cerrar el carrito no encontrado');
+    }
+
+    if (cartToggleButton) {
+        cartToggleButton.addEventListener('click', () => {
+            cart.classList.toggle('cart-hidden');
+            cart.classList.toggle('cart-visible');
+        });
+    } else {
+        console.error('Botón para abrir el carrito no encontrado');
     }
 }
 
