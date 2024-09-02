@@ -1,81 +1,86 @@
-/* styles.css */
+/* Estilos Generales */
 body {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
 
+/* Banner */
 .banner {
-    text-align: center;
-    padding: 20px;
-    background-color: #f1f1f1;
+  text-align: center;
+  padding: 20px;
+  background-color: #f1f1f1;
 }
 
+/* Barra de Navegación */
 .navbar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    padding: 10px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px;
 }
 
 .navbar .material-symbols-outlined {
-    font-size: 24px;
-    cursor: pointer;
+  font-size: 24px;
+  cursor: pointer;
 }
 
+/* Contenedor Principal */
 .main-container {
-    margin-top: 60px; 
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  margin-top: 60px; /* Asegura espacio para la barra de navegación fija */
+  display: flex;
+  justify-content: center;
 }
 
+/* Contenedor de Productos */
 .products-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
+/* Producto */
 .product {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
 }
 
 .placeholder {
-    width: 150px;
-    height: 150px;
-    background-color: #eee;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 150px;
+  height: 150px;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product img {
-    max-width: 100%;
-    max-height: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 
+/* Contenedor del Carrito */
 .cart-hidden {
-    display: none;
+  display: none;
 }
 
 .cart-visible {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100%;
-    background: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow-y: auto;
-    transition: transform 0.3s ease;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
 }
 
 #close-cart {
-    font-size: 24px;
-    cursor: pointer;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 #total {
-    font-weight: bold;
+  font-weight: bold;
 }
