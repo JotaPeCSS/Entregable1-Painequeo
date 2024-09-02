@@ -1,0 +1,24 @@
+[
+    {
+      "id": "gorra",
+      "name": "Gorra",
+      "price": 5,
+      "colors": ["rojo", "azul", "verde", "amarillo"],
+      "sizes": ["S", "M", "L", "XL"]
+    },
+    {
+      "id": "camiseta",
+      "name": "Camiseta",
+      "price": 10,
+      "colors": ["rojo", "azul", "verde", "amarillo"],
+      "sizes": ["S", "M", "L", "XL"]
+    },
+    {
+      "id": "chaqueta",
+      "name": "Chaqueta",
+      "price": 25,
+      "colors": ["rojo", "azul", "verde", "amarillo"],
+      "sizes": ["S", "M", "L", "XL"]
+    }
+  ]
+  
