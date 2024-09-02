@@ -1,130 +1,92 @@
-class ShoppingCart {
-  constructor() {
-    // Inicializa el carrito con los productos y sus cantidades
-    this.cart = {
-      gorra: 0,
-      camiseta: 0,
-      chaqueta: 0,
-    };
+// script.js
 
-    // Define los precios de los productos
-    this.prices = {
-      gorra: 5,
-      camiseta: 10,
-      chaqueta: 25,
-    };
+// Variables globales
+let cart = []; // Array para almacenar los productos en el carrito
 
-    // Actualiza la visualización del carrito
-    this.updateCartDisplay();
+// Función para actualizar el carrito
+function updateCart() {
+    const cartContainer = document.querySelector('#cart-items');
+    const totalElement = document.querySelector('#total');
 
-    // Carga el carrito desde localStorage si existe
-    this.loadCartFromLocalStorage();
-  }
+    // Vacía el contenedor del carrito antes de actualizarlo
+    cartContainer.innerHTML = '';
 
-  // Agrega un producto al carrito
-  addToCart(product) {
-    // Si el total de productos es 10, muestra un mensaje de alerta
-    if (this.getTotalItems() >= 10) {
-      alert("No se pueden agregar más de 10 productos en total");
-      return;
-    }
+    // Calcula el total
+    let total = 0;
 
-    // Incrementa la cantidad del producto seleccionado
-    this.cart[product]++;
-    this.updateCartDisplay();
-    this.saveCartToLocalStorage();
-    this.checkCheckoutButton(); // Revisa si activar el botón de checkout
-  }
+    cart.forEach(product => {
+        // Crea el HTML para cada producto en el carrito
+        const cartItemHTML = `
+            <div class="cart-item">
+                <span>${product.name}</span>
+                <span>${product.price} USD</span>
+                <button data-id="${product.id}" class="remove-from-cart">Eliminar</button>
+            </div>
+        `;
+        cartContainer.insertAdjacentHTML('beforeend', cartItemHTML);
 
-  // Calcula el total de productos en el carrito
-  getTotalItems() {
-    return Object.values(this.cart).reduce((sum, count) => sum + count, 0);
-  }
+        // Suma el precio al total
+        total += product.price;
+    });
 
-  // Actualiza la visualización del carrito en el DOM
-  updateCartDisplay() {
-    document.getElementById("gorra-count").innerText = this.cart.gorra;
-    document.getElementById("camiseta-count").innerText = this.cart.camiseta;
-    document.getElementById("chaqueta-count").innerText = this.cart.chaqueta;
-    document.getElementById("total").innerText =
-      this.calculateTotal().toFixed(2);
-  }
-
-  // Calcula el total en precio del carrito
-  calculateTotal() {
-    return (
-      this.cart.gorra * this.prices.gorra +
-      this.cart.camiseta * this.prices.camiseta +
-      this.cart.chaqueta * this.prices.chaqueta
-    );
-  }
-
-  // Muestra un mensaje de checkout en el DOM
-  checkout() {
-    const messageElement = document.getElementById("message");
-    messageElement.innerText = "Ir a la página de pago (de mentiritas).";
-    messageElement.style.display = "block";
-
-    // Oculta el mensaje después de 3 segundos
-    setTimeout(() => {
-      messageElement.style.display = "none";
-    }, 3000);
-  }
-
-  // Vacía el carrito de compras
-  clearCart() {
-    this.cart = {
-      gorra: 0,
-      camiseta: 0,
-      chaqueta: 0,
-    };
-    this.updateCartDisplay();
-    this.saveCartToLocalStorage();
-    this.checkCheckoutButton(); // Revisa si desactivar el botón de checkout
-  }
-
-  // Guarda el carrito en localStorage
-  saveCartToLocalStorage() {
-    localStorage.setItem("shoppingCart", JSON.stringify(this.cart));
-  }
-
-  // Carga el carrito desde localStorage
-  loadCartFromLocalStorage() {
-    const savedCart = localStorage.getItem("shoppingCart");
-    if (savedCart) {
-      this.cart = JSON.parse(savedCart);
-      this.updateCartDisplay();
-    }
-    this.checkCheckoutButton(); // Revisa si activar el botón de checkout
-  }
-
-  // Activa o desactiva el botón de checkout según el estado del carrito
-  checkCheckoutButton() {
-    const checkoutButton = document.getElementById("checkout");
-    if (this.getTotalItems() > 0) {
-      checkoutButton.disabled = false;
-    } else {
-      checkoutButton.disabled = true;
-    }
-  }
+    // Actualiza el total en la interfaz de usuario
+    totalElement.textContent = `Total: ${total.toFixed(2)} USD`;
 }
 
-// Inicializa el carrito de compras
-const cart = new ShoppingCart();
+// Función para añadir un producto al carrito
+function addToCart(productId) {
+    // Busca el producto en el array de productos
+    const product = products.find(p => p.id === productId);
 
-// Asigna los eventos a los botones
-document
-  .getElementById("add-gorra")
-  .addEventListener("click", () => cart.addToCart("gorra"));
-document
-  .getElementById("add-camiseta")
-  .addEventListener("click", () => cart.addToCart("camiseta"));
-document
-  .getElementById("add-chaqueta")
-  .addEventListener("click", () => cart.addToCart("chaqueta"));
-document
-  .getElementById("checkout")
-  .addEventListener("click", () => cart.checkout());
-document
-  .getElementById("clear-cart")
-  .addEventListener("click", () => cart.clearCart());
+    // Verifica si el producto existe
+    if (product) {
+        // Añade el producto al carrito
+        cart.push(product);
+        // Actualiza el carrito en la interfaz de usuario
+        updateCart();
+    }
+}
+
+// Función para eliminar un producto del carrito
+function removeFromCart(productId) {
+    // Filtra el carrito para eliminar el producto con el ID proporcionado
+    cart = cart.filter(p => p.id !== productId);
+    // Actualiza el carrito en la interfaz de usuario
+    updateCart();
+}
+
+// Función para manejar los clics en el carrito
+function handleCartActions(event) {
+    const button = event.target;
+
+    // Verifica si el botón clickeado es un botón para eliminar del carrito
+    if (button.classList.contains('remove-from-cart')) {
+        const productId = parseInt(button.getAttribute('data-id'), 10);
+        removeFromCart(productId);
+    }
+}
+
+// Función para manejar los clics en los botones de añadir al carrito
+function handleAddToCartButtons(event) {
+    const button = event.target;
+
+    // Verifica si el botón clickeado es un botón para añadir al carrito
+    if (button.tagName === 'BUTTON') {
+        const productId = parseInt(button.getAttribute('data-id'), 10);
+        addToCart(productId);
+    }
+}
+
+// Inicializa la interfaz de usuario
+function initialize() {
+    // Maneja los clics en el carrito
+    document.querySelector('#cart-items').addEventListener('click', handleCartActions);
+    // Maneja los clics en los botones de añadir al carrito
+    document.querySelector('.products-container').addEventListener('click', handleAddToCartButtons);
+
+    // Llama a renderProducts para mostrar los productos al cargar la página
+    renderProducts();
+}
+
+// Llama a initialize cuando la página esté cargada
+document.addEventListener('DOMContentLoaded', initialize);
