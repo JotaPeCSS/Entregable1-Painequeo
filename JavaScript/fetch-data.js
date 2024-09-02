@@ -50,7 +50,7 @@ async function renderProducts() {
 
         // Add event listener for new product buttons
         document.getElementById(`add-${product.id}`).addEventListener('click', () => {
-            shoppingCart.addToCart(product.id);
+            addToCart(product.id);
         });
     });
 }
