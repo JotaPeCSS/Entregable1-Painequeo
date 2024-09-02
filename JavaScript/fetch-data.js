@@ -41,15 +41,10 @@ async function renderProducts() {
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                 </select>
-                <button id="add-${product.id}">Añadir al carrito</button>
+                <button class="add-to-cart-button" data-id="${product.id}" data-price="${product.price}">Añadir al carrito</button>
             </div>
         `;
         productsContainer.insertAdjacentHTML('beforeend', productHTML);
-
-        // Add event listener for new product buttons
-        document.getElementById(`add-${product.id}`).addEventListener('click', () => {
-            shoppingCart.addToCart(product.id);
-        });
     });
 }
 
