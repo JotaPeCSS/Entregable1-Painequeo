@@ -3,38 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda de Productos</title>
-    <link rel="stylesheet" href="./CSS/styles.css">
-    <!-- Incluye la librería SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Mi Proyecto</title>
+    <link rel="stylesheet" href="CSS/styles.css">
 </head>
 <body>
-    <!-- Banner de bienvenida -->
     <div class="banner">
-        <h1>Bienvenido a nuestra tienda</h1>
+        <h1>Bienvenido a Mi Tienda</h1>
     </div>
 
-    <!-- Barra de navegación con el icono del carrito -->
-    <div class="navbar">
-        <span class="material-symbols-outlined" id="cart-toggle">shopping_cart</span>
+    <div id="products-container" class="main-container">
+        <!-- Los productos se cargarán aquí dinámicamente -->
     </div>
 
-    <!-- Contenedor principal con los productos y carrito -->
-    <div class="main-container">
-        <!-- Contenedor de productos -->
-        <div id="products-container" class="products-container"></div>
-
-        <!-- Contenedor del carrito de compras -->
-        <div id="cart" class="cart-hidden">
-            <span id="close-cart" class="material-symbols-outlined">close</span>
-            <h2>Carrito de Compras</h2>
-            <ul id="cart-items"></ul>
-            <p id="total">Total: $0</p>
-        </div>
+    <div id="cart" class="cart-hidden">
+        <span id="close-cart">&times;</span>
+        <h2>Carrito de Compras</h2>
+        <ul id="cart-items">
+            <!-- Los ítems del carrito se cargarán aquí dinámicamente -->
+        </ul>
+        <div id="total">Total: $0.00</div>
     </div>
 
-    <!-- Scripts JavaScript -->
-    <script src="./JavaScript/fetch-data.js"></script>
-    <script src="./JavaScript/shopping-cart.js"></script>
+    <script src="JavaScript/fetch-data.js"></script>
+    <script src="JavaScript/shopping-cart.js"></script>
+    <script src="JavaScript/script.js"></script>
 </body>
 </html>
