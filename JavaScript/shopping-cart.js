@@ -4,7 +4,7 @@
 function initializeCart() {
     const cart = document.getElementById('cart');
     const closeCartButton = document.getElementById('close-cart');
-    const cartButton = document.getElementById('cart-button'); // Añadido: botón para abrir el carrito
+    const cartButton = document.getElementById('cart-button'); // Botón para abrir el carrito
 
     if (closeCartButton) {
         closeCartButton.addEventListener('click', () => {
