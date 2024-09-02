@@ -1,8 +1,6 @@
 /* Estilos Generales */
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
 }
 
 /* Banner */
@@ -18,8 +16,6 @@ body {
   top: 0;
   right: 0;
   padding: 10px;
-  background: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .material-symbols-outlined {
@@ -39,7 +35,6 @@ body {
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 /* Producto */
@@ -47,8 +42,6 @@ body {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
-  width: 200px; /* Ajuste del ancho del producto */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .placeholder {
@@ -58,7 +51,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
 }
 
 .product img {
@@ -87,31 +79,8 @@ body {
 #close-cart {
   font-size: 24px;
   cursor: pointer;
-  margin-bottom: 20px;
-}
-
-#cart-items {
-  margin-bottom: 20px;
-}
-
-.cart-item {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
 }
 
 #total {
   font-weight: bold;
-}
-
-/* Estilos Responsivos */
-@media (max-width: 600px) {
-  .products-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .product {
-    width: 100%;
-    max-width: 300px;
-  }
 }
